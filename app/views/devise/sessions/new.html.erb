@@ -1,0 +1,49 @@
+<div class=" items-center px-5 py-12 lg:px-20">
+  <div class="flex flex-col w-full max-w-md p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
+    <div class="mt-8">
+      <h2 class="mt-6 text-3xl font-extrabold text-neutral-600">Sign in</h2>
+      <div class="mt-6">
+        <div class="space-y-6">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+            <div class="pb-7">
+              <div class="block text-sm font-medium text-neutral-600 pb-3">
+                <%= f.label :email %><br />
+              </div>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+            </div>
+
+            <div class="space-y-1">
+              <div class="block text-sm font-medium text-neutral-600 pb-3">
+                <%= f.label :password %><br />
+              </div>
+              <%= f.password_field :password, autocomplete: "current-password", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+            </div>
+
+            <% if devise_mapping.rememberable? %>
+              <div class="flex items-center justify-between py-4">
+                <div class="flex items-center">
+                  <%= f.check_box :remember_me, class: "w-4 h-4 text-blue-600 border-gray-200 rounded focus:ring-blue-500" %>
+                  <%= f.label :remember_me, class: "ml-2 text-sm text-neutral-600" %>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="actions">
+              <%= f.submit "Sign in", class: "flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+            </div>
+            <div class="relative my-4">
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+              </div>
+              <div class="relative flex justify-center text-sm">
+                  <span class="px-2 text-neutral-600 bg-white"> Or continue with </span>
+              </div>
+            </div>
+          <% end %>
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
