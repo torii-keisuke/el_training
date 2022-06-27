@@ -1,0 +1,31 @@
+<div class=" items-center px-5 lg:px-20">
+  <div class="flex flex-col w-full max-w-md p-5 mx-auto my-3 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
+    <div class="text-center">
+      <h1 class="mt-6 text-3xl font-extrabold text-neutral-600"><%= @task.title %>の編集</h1>
+      <div class="relative mt-4 mb-2">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+            <span class="px-2 text-neutral-600 bg-white"></span>
+        </div>
+      </div>
+      <%= form_with model: @task, url: task_path(@task.id), method: :patch, local: true do |f| %>
+        <%= f.label :status, "ステータス変更", class: "block text-lg font-medium text-neutral-600 p-3" %>
+        <%= f.select :status, Task.statuses.keys, class: "status-select" %>
+        <%= f.text_field :title, placeholder: "タスク名", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 my-7" %>
+        <%= f.text_area :content, placeholder: "説明", size: "20x8", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 my-7" %>
+        <%= f.submit "変更", class: "flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <% end %>
+      <div class="relative mt-4 mb-2">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+            <span class="px-2 text-neutral-600 bg-white"></span>
+        </div>
+      </div>
+      <%= button_to "削除", task_path(@task.id), method: :delete %>
+    </div>
+  </div>
+</div>
