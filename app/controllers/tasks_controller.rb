@@ -22,9 +22,16 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.find(params[:id])
   end
 
   def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to root_path
+    else
+      render action: :edit
+    end
   end
 
   def destroy
@@ -39,6 +46,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:task).permit(:title, :content, :status).merge(user_id: current_user.id)
   end
 end

@@ -16,7 +16,7 @@
 
           <% @tasks.each do |task| %>
             <div class="mt-2">
-              <%= link_to task.title, task_path(task.id), class: "text-lg font-medium text-neutral-600 p-3" %><hr>
+              <%= link_to task.title, edit_task_path(task.id), class: "text-lg font-medium text-neutral-600 p-3" %><hr>
             </div>
           <% end %>
 
