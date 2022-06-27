@@ -27,10 +27,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    @task.title = params[:task][:title]
-    @task.content = params[:task][:content]
-    @task.status = params[:task][:status]
-    if @task.save
+    if @task.update(task_params)
       redirect_to root_path
     else
       render action: :edit
@@ -49,6 +46,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:task).permit(:title, :content, :status).merge(user_id: current_user.id)
   end
 end
