@@ -1,5 +1,10 @@
 class LabelsController < ApplicationController
 
+  def index
+    @task = Task.find(params[:task_id])
+    redirect_to new_task_label_path(@task.id)
+  end
+
   def new
     @label = Label.new
     @task = Task.find(params[:task_id])
@@ -8,10 +13,12 @@ class LabelsController < ApplicationController
 
   def create
     @task = Task.find(params[:task_id])
+    @labels = @task.labels
     @label = @task.labels.build(label_params)
     if @task.save
       redirect_to edit_task_path(@task.id)
     else
+      flash.now[:alert] = "名前は書いてください。"
       render action: :new
     end
   end
