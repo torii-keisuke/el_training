@@ -18,8 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_021403) do
     t.text "content"
     t.integer "user_id"
     t.integer "status", limit: 1, default: 0, null: false
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date "start_date"
+    t.date "end_date"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
