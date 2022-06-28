@@ -2,20 +2,20 @@ class LabelsController < ApplicationController
 
   def index
     @task = Task.find(params[:task_id])
-    redirect_to new_task_label_path(@task.id)
+    @labels = current_user.labels
   end
 
   def new
-    @label = Label.new
+    @label = Label.new(user_id: current_user.id)
     @task = Task.find(params[:task_id])
-    @labels = @task.labels
+    @labels = current_user.labels
   end
 
   def create
     @task = Task.find(params[:task_id])
     @labels = @task.labels
-    @label = @task.labels.build(label_params)
-    if @task.save
+    @label = Label.new(label_params)
+    if @label.save
       redirect_to edit_task_path(@task.id)
     else
       flash.now[:alert] = "名前は書いてください。"
@@ -33,6 +33,6 @@ class LabelsController < ApplicationController
   private
 
   def label_params
-    params.require(:label).permit(:name)
+    params.require(:label).permit(:name).merge(user_id: current_user.id)
   end
 end
