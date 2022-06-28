@@ -4,27 +4,16 @@
       <% if current_user.present? %>
         <% if @tasks.present? %>
           <h1 class="mt-6 text-3xl font-extrabold text-neutral-600"><%= current_user.name%>のタスク一覧</h1>
-
-            <div class="relative mt-4 mb-1">
-              <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-gray-300"></div>
-              </div>
-              <div class="relative flex justify-center text-sm">
-                  <span class="px-2 text-neutral-600 bg-white"></span>
-              </div>
-            </div>
-
+            <div class="relative my-4 w-full border-t border-gray-300"></div>
           <% @tasks.each do |task| %>
             <div class="mt-2">
               <%= link_to task.title, edit_task_path(task.id), class: "text-lg font-medium text-neutral-600 p-3" %><hr>
             </div>
           <% end %>
-
         <% else %>
           <h1>新規タスクを作成してください。</h1>
           <%= link_to "タスクを作成する", new_task_path, class: "text-blue-700" %>
         <% end %>
-
       <% else %>
         <h1><%= link_to "ログイン", new_user_session_path, class: "text-blue-700" %>してください。初めてご利用される方は、<%= link_to "新規登録", new_user_registration_path, class: "text-blue-700" %>してください。</h1>
       <% end %>

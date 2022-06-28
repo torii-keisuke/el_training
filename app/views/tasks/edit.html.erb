@@ -2,34 +2,34 @@
   <div class="flex flex-col w-full max-w-md p-5 mx-auto my-3 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
     <div class="text-center">
       <h1 class="mt-6 text-3xl font-extrabold text-neutral-600"><%= @task.title %>の編集</h1>
-      <div class="relative mt-4 mb-2">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300"></div>
-        </div>
-        <div class="relative flex justify-center text-sm">
-          <span class="px-2 text-neutral-600 bg-white"></span>
-        </div>
-      </div>
+      <div class="relative my-4 w-full border-t border-gray-300"></div>
       <%= form_with model: @task, url: task_path(@task.id), method: :patch, local: true do |f| %>
-        <%= f.label :status, "ステータス変更", class: "block font-medium pt-3 pb-2 font-semibold" %>
+        <%= f.label :status, "ステータス変更", class: "block font-medium pt-1 pb-2 font-semibold" %>
         <%= f.select :status, Task.statuses.keys %>
+        <div class="relative my-4 w-full border-t border-gray-300"></div>
+        <% if @labels.present? %>
+          <%= f.label :label, "ラベル", class: "block font-medium pt-1 pb-2 font-semibold" %>
+          <%= f.collection_select :name, @labels, :id, :name %>
+          <%= link_to "ラベル作成", new_task_label_path(@task.id), class: "flex items-center justify-center w-full px-10 py-4 mt-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+        <% else %>
+          <%= f.label :label, "ラベル", class: "block font-medium pt-1 pb-2 font-semibold" %>
+          <p class="mb-3">ラベルがありません</p>
+          <p><%= link_to "ラベル作成", new_task_label_path(@task.id), class: "flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %></p>
+        <% end %>
+        <div class="relative my-4 w-full border-t border-gray-300"></div>
         <%= f.label :start_date, "開始日", class: "block pt-4 pb-2 font-semibold" %>
         <%= f.date_field :start_date, class: "justify-center" %>
         <%= f.label :end_date, "終了日", class: "block pt-4 pb-2 font-semibold" %>
         <%= f.date_field :end_date, class: "justify-center" %>
+        <div class="relative my-4 w-full border-t border-gray-300"></div>
+        <%= f.label :title, "タイトル", class: "block font-semibold" %>
         <%= f.text_field :title, placeholder: "タスク名", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 my-7" %>
+        <%= f.label :content, "詳細", class: "font-semibold" %>
         <%= f.text_area :content, placeholder: "説明", size: "20x8", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 my-7" %>
         <%= f.submit "変更", class: "flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
       <% end %>
-      <div class="relative mt-4 mb-2">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300"></div>
-        </div>
-        <div class="relative flex justify-center text-sm">
-            <span class="px-2 text-neutral-600 bg-white"></span>
-        </div>
-      </div>
-      <%= button_to "削除", task_path(@task.id), method: :delete %>
+      <div class="relative my-4 w-full border-t border-gray-300"></div>
+      <%= button_to "削除", task_path(@task.id), { method: :delete, class: "flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-red-500 rounded-xl hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" } %>
     </div>
   </div>
 </div>
