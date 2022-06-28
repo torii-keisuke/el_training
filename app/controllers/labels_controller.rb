@@ -7,10 +7,9 @@ class LabelsController < ApplicationController
   end
 
   def create
-    @label = Label.new(label_params)
     @task = Task.find(params[:task_id])
-    if @label.save
-      LabelTask.create(label_id: @label.id, task_id: @task.id)
+    @label = @task.labels.build(label_params)
+    if @task.save
       redirect_to edit_task_path(@task.id)
     else
       render action: :new
