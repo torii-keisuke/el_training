@@ -10,11 +10,6 @@ class TasksController < ApplicationController
     @sort_list = Task.sort_list
   end
 
-  # def search
-  #   selection = params[:keyword]
-  #   @tasks = Task.sort(selection)
-  # end
-
   def new
     @task = Task.new
   end
