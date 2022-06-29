@@ -23,7 +23,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-    @labels = @task.labels
+    @labels = current_user.labels
   end
 
   def update
@@ -47,6 +47,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :status, :start_date, :end_date).merge(user_id: current_user.id)
+    params.require(:task).permit(:title, :content, :status, { label_ids: [] }, :start_date, :end_date).merge(user_id: current_user.id)
   end
 end
