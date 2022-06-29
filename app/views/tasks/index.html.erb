@@ -7,12 +7,12 @@
             <div class="relative my-4 w-full border-t border-gray-300"></div>
           <% @tasks.each do |task| %>
             <div class="mt-2">
-              <%= link_to task.title, edit_task_path(task.id), class: "text-lg font-medium text-neutral-600 p-3" %><hr>
+              <%= link_to task.title, edit_user_task_path(current_user.id, task.id), class: "text-lg font-medium text-neutral-600 p-3" %><hr>
             </div>
           <% end %>
         <% else %>
           <h1>新規タスクを作成してください。</h1>
-          <%= link_to "タスクを作成する", new_task_path, class: "text-blue-700" %>
+          <%= link_to "タスクを作成する", new_user_task_path(current_user.id), class: "text-blue-700" %>
         <% end %>
       <% else %>
         <h1><%= link_to "ログイン", new_user_session_path, class: "text-blue-700" %>してください。初めてご利用される方は、<%= link_to "新規登録", new_user_registration_path, class: "text-blue-700" %>してください。</h1>

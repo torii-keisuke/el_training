@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   root 'tasks#index'
 
   resources :users do
-    resources :labels
+    resources :tasks do
+      resources :labels
+    end
   end
-  resources :tasks
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
