@@ -6,7 +6,7 @@
           <h1 class="mt-6 mb-4 text-3xl font-extrabold text-neutral-600"><%= current_user.name%>のタスク一覧</h1>
 
           <%= form_with url: user_tasks_path(current_user.id), method: :get, local: true do |f| %>
-            <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class: "px-4 py-2 ml-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+            <%= f.select :sort, @sort_list, {}, onchange: "javascript: this.form.submit();", class: "px-4 py-2 ml-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
           <% end %>
           <div class="relative my-4 w-full border-t border-gray-300"></div>
           <% @tasks.each do |task| %>

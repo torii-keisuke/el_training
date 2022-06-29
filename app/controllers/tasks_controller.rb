@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
 
   def index
-@tasks = Task.where(user_id: current_user.id)
     if sort_params.present?
       @tasks = Task.where(user_id: current_user.id).sort_tasks(sort_params)
     else
