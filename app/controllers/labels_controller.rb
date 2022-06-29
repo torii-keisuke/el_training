@@ -1,22 +1,16 @@
 class LabelsController < ApplicationController
-
-  def index
-    @task = Task.find(params[:task_id])
-    @labels = current_user.labels
-  end
+  before_action :authenticate_user!
 
   def new
     @label = Label.new(user_id: current_user.id)
-    @task = Task.find(params[:task_id])
     @labels = current_user.labels
   end
 
   def create
-    @task = Task.find(params[:task_id])
-    @labels = @task.labels
+    @labels = current_user.labels
     @label = Label.new(label_params)
     if @label.save
-      redirect_to edit_task_path(@task.id)
+      redirect_to user_labels_path(current_user.id)
     else
       flash.now[:alert] = "名前は書いてください。"
       render action: :new
@@ -25,9 +19,8 @@ class LabelsController < ApplicationController
 
   def destroy
     label = Label.find(params[:id])
-    task = Task.find(params[:task_id])
     label.destroy
-    redirect_to new_task_label_path(task.id)
+    redirect_to new_user_label_path(current_user.id)
   end
 
   private

@@ -4,12 +4,16 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
   root 'tasks#index'
 
-  resources :users
-  resources :tasks do
+  resources :users do
     resources :labels
   end
+  resources :tasks
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
