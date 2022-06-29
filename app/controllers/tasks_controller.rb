@@ -1,8 +1,19 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.where(user_id: current_user.id)
+@tasks = Task.where(user_id: current_user.id)
+    if sort_params.present?
+      @tasks = Task.where(user_id: current_user.id).sort_tasks(sort_params)
+    else
+      @tasks = Task.where(user_id: current_user.id)
+    end
+    @sort_list = Task.sort_list
   end
+
+  # def search
+  #   selection = params[:keyword]
+  #   @tasks = Task.sort(selection)
+  # end
 
   def new
     @task = Task.new
@@ -48,5 +59,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :content, :status, :priority, { label_ids: [] }, :start_date, :end_date).merge(user_id: current_user.id)
+  end
+
+  def sort_params
+    params.permit(:sort)
   end
 end
