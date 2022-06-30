@@ -1,14 +1,15 @@
 class TasksController < ApplicationController
-  before_action :set_q, only: [:index, :search]
 
   def index
-    @statuses = Task.statuses
-    @labels = current_user.labels
     if sort_params.present?
       @tasks = Task.where(user_id: current_user.id).sort_tasks(sort_params).page(params[:page]).per(10)
     else
       @tasks = Task.where(user_id: current_user.id).page(params[:page]).per(10)
     end
+    @statuses = Task.statuses
+    @labels = current_user.labels
+    @q = @tasks.ransack(params[:q])
+    @result_tasks = @q.result
     @sort_list = Task.sort_list
   end
 
@@ -52,16 +53,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def search
-    @results = @q.result
-  end
-
   private
-
-  def set_q
-    @tasks = Task.where(user_id: current_user.id)
-    @q = @tasks.ransack(params[:q])
-  end
 
   def task_params
     params.require(:task).permit(:title, :content, :status, :priority, { label_ids: [] }, :start_date, :end_date).merge(user_id: current_user.id)
