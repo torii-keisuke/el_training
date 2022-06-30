@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   end
 
   root 'tasks#index'
+  get 'admin' => 'users#index', as: 'users'
 
-  resources :users do
+  resources :users, only: [:destroy] do
     resources :tasks do
       resources :labels
     end

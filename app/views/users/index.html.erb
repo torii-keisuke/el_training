@@ -1,0 +1,25 @@
+<div class=" items-center px-5 lg:px-20">
+  <div class="max-w-md p-5 mx-auto my-3 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
+    <div class="text-center">
+      <h1 class="mt-6 mb-4 text-3xl font-extrabold text-neutral-600">ユーザー一覧</h1>
+      <div class="relative my-4 w-full border-t border-gray-300"></div>
+      <% if current_user.admin? %>
+        <% @users.each do |user| %>
+          <div class="text-lg font-medium text-neutral-600">
+            <h1 class="mb-3">
+              id: <%= user.id %>, name: <%= user.name %>
+            </h1>
+          </div>
+            <%= button_to "削除", user_path(user.id), { method: :delete, class: "px-2 py-1 mb-5 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-red-500 rounded-xl hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" } %>
+          <%= form_with model:@post, local: true do |form| %>
+            <%= form.label "ロール" %>
+            <%= form.select :admin, [['一般ユーザー',0],['管理者ユーザー',1]], { include_blank: true, selected: 0 } %>
+            <%= form.submit "変更", class: "px-2 py-1 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-red-500 rounded-xl hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+          <% end %>
+          <div class="relative my-4 w-full border-t border-gray-300"></div>
+        <% end %>
+        <%= paginate @users %>
+      <% end %>
+    </div>
+  </div>
+</div>
