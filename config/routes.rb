@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :tasks do
+      collection do
+        get 'search'
+      end
       resources :labels
     end
   end
