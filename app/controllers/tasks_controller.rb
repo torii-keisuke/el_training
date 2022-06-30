@@ -2,10 +2,14 @@ class TasksController < ApplicationController
 
   def index
     if sort_params.present?
-      @tasks = Task.where(user_id: current_user.id).sort_tasks(sort_params)
+      @tasks = Task.where(user_id: current_user.id).sort_tasks(sort_params).page(params[:page]).per(10)
     else
-      @tasks = Task.where(user_id: current_user.id)
+      @tasks = Task.where(user_id: current_user.id).page(params[:page]).per(10)
     end
+    @statuses = Task.statuses
+    @labels = current_user.labels
+    @q = @tasks.ransack(params[:q])
+    @result_tasks = @q.result
     @sort_list = Task.sort_list
   end
 
