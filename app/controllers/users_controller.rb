@@ -9,7 +9,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     admin_users = User.where(is_admin: true)
     if admin_users.count == 1 && current_user == @user
-      flash[:alert] = "管理者がいなくなっちゃうよ！"
+      if params[:is_admin] == "0"
+        flash[:alert] = "管理者がいなくなっちゃうよ！"
+      else
+        flash[:alert] = "君は管理者だよ"
+      end
     elsif @user.update(user_params)
       flash[:notice] = "変更できたよ！"
     else
