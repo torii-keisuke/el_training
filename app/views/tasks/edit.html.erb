@@ -17,7 +17,7 @@
           <%= link_to "ラベル作成", new_user_task_label_path(current_user.id, @task.id), class: "flex items-center justify-center w-full px-10 py-4 mt-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-lime-500 rounded-xl hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
         <% else %>
           <%= f.label :label, "ラベル", class: "block font-medium pt-1 pb-2 font-semibold" %>
-          <p class="mb-3">ラベルがありません</p>
+          <p class="mb-3 text-red-600 font-semibold">ラベルがありません</p>
           <p><%= link_to "ラベル作成", new_user_task_label_path(current_user.id, @task.id), class: "flex items-center justify-center w-full px-10 py-4 mt-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-lime-500 rounded-xl hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %></p>
         <% end %>
         <div class="relative my-4 w-full border-t border-gray-300"></div>
