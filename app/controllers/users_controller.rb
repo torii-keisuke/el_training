@@ -20,7 +20,6 @@ class UsersController < ApplicationController
       flash[:alert] = "変更に失敗したよ！"
     end
     redirect_to admin_path
-    # おちんちん
   end
 
   def destroy
