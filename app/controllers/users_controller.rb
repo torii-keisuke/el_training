@@ -7,32 +7,27 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @admin_users = User.where(is_admin: true)
-    if @admin_users.count == 1 && current_user == @user
+    admin_users = User.where(is_admin: true)
+    if admin_users.count == 1 && current_user == @user
       flash[:alert] = "管理者がいなくなっちゃうよ！"
-      redirect_to admin_path
+    elsif @user.update(user_params)
+      flash[:notice] = "変更できたよ！"
     else
-      if @user.update(user_params)
-        flash[:notice] = "変更できたよ！"
-        redirect_to admin_path
-      else
-        flash[:alert] = "変更に失敗したよ！"
-        redirect_to admin_path
-      end
+      flash[:alert] = "変更に失敗したよ！"
     end
+    redirect_to admin_path
   end
 
   def destroy
     @user = User.find(params[:id])
-    @admin_users = User.where(is_admin: true)
-    if @admin_users.count == 1 && current_user == @user
+    admin_users = User.where(is_admin: true)
+    if admin_users.count == 1 && current_user == @user
       flash[:alert] = "管理者がいなくなちゃうよ！"
-      redirect_to admin_path
     else
       @user.destroy
       flash[:notice] = "ユーザーの削除に成功しました。"
-      redirect_to admin_path
     end
+    redirect_to admin_path
   end
 
   private
