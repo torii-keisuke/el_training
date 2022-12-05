@@ -32,8 +32,8 @@ gem 'jbuilder'
 
 # 追加したGem達
 gem 'devise'
-gem 'ransack'
 gem 'kaminari'
+gem 'ransack'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -73,8 +73,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
@@ -82,4 +82,8 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+end
+
+group :production do
+  gem 'unicorn'
 end

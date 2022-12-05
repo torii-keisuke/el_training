@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :admin_user, only: [:index, :update, :destroy]
+  before_action :admin_user, only: %i[index update destroy]
 
   def index
     @users = User.all.page(params[:page]).per(10)
@@ -9,15 +9,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     admin_users = User.where(is_admin: true)
     if admin_users.count == 1 && current_user == @user
-      if params[:is_admin] == "0"
-        flash[:alert] = "管理者がいなくなっちゃうよ！"
-      else
-        flash[:alert] = "君は管理者だよ"
-      end
+      flash[:alert] = if params[:is_admin] == '0'
+                        '管理者がいなくなっちゃうよ！'
+                      else
+                        '君は管理者だよ'
+                      end
     elsif @user.update(user_params)
-      flash[:notice] = "変更できたよ！"
+      flash[:notice] = '変更できたよ！'
     else
-      flash[:alert] = "変更に失敗したよ！"
+      flash[:alert] = '変更に失敗したよ！'
     end
     redirect_to admin_path
   end
@@ -26,10 +26,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     admin_users = User.where(is_admin: true)
     if admin_users.count == 1 && current_user == @user
-      flash[:alert] = "管理者がいなくなちゃうよ！"
+      flash[:alert] = '管理者がいなくなちゃうよ！'
     else
       @user.destroy
-      flash[:notice] = "ユーザーの削除に成功しました。"
+      flash[:notice] = 'ユーザーの削除に成功しました。'
     end
     redirect_to admin_path
   end

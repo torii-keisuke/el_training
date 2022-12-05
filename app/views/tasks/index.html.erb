@@ -1,4 +1,4 @@
-<div class=" items-center px-5 lg:px-20">
+<div class="z-20 items-center px-5 lg:px-20">
   <div class="max-w-md p-5 mx-auto my-3 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
     <div class="text-center">
     <% if current_user.is_admin? %>
@@ -8,7 +8,7 @@
         <% if @tasks.present? %>
           <h1 class="mt-6 mb-4 text-3xl font-extrabold text-neutral-600"><%= current_user.name%>のタスク一覧</h1>
           <div class="relative my-4 w-full border-t border-gray-300"></div>
-          <h1 class="block font-medium pt-1 pb-2 font-semibold">タスク検索</h1>
+          <h1 class="block font-medium pt-1 pb-2">タスク検索</h1>
 
           <%= search_form_for @q, url: user_tasks_path(current_user.id) do |f| %>
             <%= f.search_field :title_cont, placeholder: "検索", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>

@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   root 'tasks#index'
   get 'admin' => 'users#index'
 
-  resources :users, only: [:update, :destroy] do
+  resources :users, only: %i[update destroy] do
     resources :tasks do
-      resources :labels
+      resources :labels, only: %i[new create destroy]
     end
   end
 

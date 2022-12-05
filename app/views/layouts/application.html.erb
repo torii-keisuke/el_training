@@ -9,10 +9,24 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-
   <body>
-    <%= render "layouts/header" %>
+    <header class="z-50 fixed top-0">
+      <%= render "layouts/header" %>
+    </header>
     <%= render "layouts/flash" %>
-    <%= yield %>
+    <div class="pt-[48px] z-3">
+      <%= yield %>
+    </div>
   </body>
 </html>
+
+<script>
+  let win
+  const openWindow = () => {
+    win = window.open("https://google.com")
+  }
+
+  const closeWindow = () => {
+    win.close()
+  }
+  </script>

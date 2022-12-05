@@ -1,5 +1,4 @@
 class LabelsController < ApplicationController
-
   def new
     @task = Task.find(params[:task_id])
     @label = Label.new(user_id: current_user.id)
@@ -13,8 +12,8 @@ class LabelsController < ApplicationController
     if @label.save
       redirect_to new_user_task_label_path(current_user.id, @task.id)
     else
-      flash.now[:alert] = "名前は書いてください。"
-      render action: :new
+      flash[:alert] = '名前は書いてください。'
+      redirect_to new_user_task_label_path(current_user.id, @task.id)
     end
   end
 

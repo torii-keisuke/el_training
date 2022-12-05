@@ -1,11 +1,10 @@
 class TasksController < ApplicationController
-
   def index
-    if sort_params.present?
-      @tasks = Task.where(user_id: current_user.id).sort_tasks(sort_params).page(params[:page]).per(10)
-    else
-      @tasks = Task.where(user_id: current_user.id).page(params[:page]).per(10)
-    end
+    @tasks = if sort_params.present?
+               Task.where(user_id: current_user.id).sort_tasks(sort_params).page(params[:page]).per(10)
+             else
+               Task.where(user_id: current_user.id).page(params[:page]).per(10)
+             end
     @statuses = Task.statuses
     @labels = current_user.labels
     @q = @tasks.ransack(params[:q])
@@ -56,7 +55,8 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :status, :priority, { label_ids: [] }, :start_date, :end_date).merge(user_id: current_user.id)
+    params.require(:task).permit(:title, :content, :status, :priority, { label_ids: [] }, :start_date,
+                                 :end_date).merge(user_id: current_user.id)
   end
 
   def sort_params
